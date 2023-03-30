@@ -94,18 +94,31 @@ public class ProjectJava extends JFrame {
         int minutes = (int) input_minutes.getValue();
 
         // Check if all fields are filled in
-        if (!firstName.isEmpty() && !lastName.isEmpty() && hours > 0 && minutes > 0) {
+        if (!firstName.isEmpty() && !lastName.isEmpty() && hours >= 0 && minutes >= 0) {
             // Add participant's name to colpanel1
             JLabel nameLabel = new JLabel(firstName + " " + lastName);
             colpanel1.add(nameLabel);
 
-            // Display thank you message
-            JLabel messageLabel = new JLabel("Thank you, you were added as a participant.");
-            colpanel1.add(messageLabel);
+            // Save the participant info
+            String participantName = firstName + " " + lastName;
+            String message = "Thank you! You were added as a participant.";
+            // Display the participant name and message on colpanel1
+            JLabel participantLabel = new JLabel(participantName + " - " + message);
+            colpanel1.add(participantLabel);
+
+            // Clear the input fields
+            insertFn.setText("");
+            insertLN.setText("");
+            input_hours.setValue(0);
+            input_minutes.setValue(0);
 
             // Refresh the panel to show the new participant and message
             colpanel1.revalidate();
             colpanel1.repaint();
+        } else {
+            JOptionPane.showMessageDialog(mainPanel, "Please fill in all fields.");
+            return;
         }
     }
+
 }
