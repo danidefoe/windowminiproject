@@ -21,8 +21,6 @@ public class ProjectJava extends JFrame {
     private JLabel timeslotMin;
     private JLabel tfLastName;
     private JPanel colpanel1;
-    private JPanel mainpanel2;
-    private JPanel mainpanel3;
     private JPanel colpanel2;
     // JLabel timeslotHou; // hours
 
@@ -93,18 +91,23 @@ public class ProjectJava extends JFrame {
         int hours = (int) input_hours.getValue();
         int minutes = (int) input_minutes.getValue();
 
+        String participantName = firstName + " " + lastName;  // define the participantsName
+
         // Check if all fields are filled in
         if (!firstName.isEmpty() && !lastName.isEmpty() && hours >= 0 && minutes >= 0) {
             // Add participant's name to colpanel1
-            JLabel nameLabel = new JLabel(firstName + " " + lastName);
+            JLabel nameLabel = new JLabel(participantName);
             colpanel1.add(nameLabel);
 
             // Save the participant info
-            String participantName = firstName + " " + lastName;
             String message = "Thank you! You were added as a participant.";
             // Display the participant name and message on colpanel1
             JLabel participantLabel = new JLabel(participantName + " - " + message);
             colpanel1.add(participantLabel);
+
+            // Display a message that the participant was added
+            JLabel messageLabel = new JLabel("Participant added: " + participantName);
+            colpanel1.add(messageLabel);
 
             // Clear the input fields
             insertFn.setText("");
