@@ -24,6 +24,9 @@ public class ParticipantInfo extends ProjectJava {
         this.minutes = minutes;
     }
 
+    public static void main(String firstName, String lastName) {
+    }
+
     public int getAppointmentTime() {
         return this.hours * 60 + this.minutes;
     }
@@ -33,4 +36,7 @@ public class ParticipantInfo extends ProjectJava {
         return this.fullName + " at " + this.hours + ":" + this.minutes;
     }
 
+    public String getFullName() {
+        return this.fullName;
+    }
 }

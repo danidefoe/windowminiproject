@@ -1,4 +1,9 @@
+
 import javax.swing.*;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -42,15 +47,25 @@ public class ProjectJava extends JFrame {
             int hours = (int) input_hours.getValue();
             int minutes = (int) input_minutes.getValue();
 
-            logField.append("Participant added!");
-            participantField.append(fullName + "reservation at" + hours + minutes);
+            // logField.append("Participant added!");
+            // participantField.append(fullName + "reservation at" + hours + minutes);
             //ParticipantInfo P = new ParticipantInfo(firstName, lastName, hours, minutes);
 
 
             try {
-                ParticipantInfo participant = new ParticipantInfo(insertFn.getText(), insertLn.getText(), (int) input_hours.getValue(), (int) input_minutes.getValue());
+                // Validate input
+                ParticipantInfo.main(firstName, lastName);
+
+                // Create participant
+                ParticipantInfo participant = new ParticipantInfo(firstName, lastName, hours, minutes);
+
+                // Add participant to list
                 list.add(participant);
                 Collections.sort(list, Comparator.comparingInt(ParticipantInfo::getAppointmentTime));
+
+                // Update UI
+                logField.append("Participant added!");
+                participantField.append(participant.getFu00llName() + " reservation at " + hours + ":" + minutes);
             } catch (IllegalArgumentException ex) {
                 JOptionPane.showMessageDialog(addParticipantButton, "Name participant not valid!");
             }
