@@ -4,6 +4,7 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,11 +48,6 @@ public class ProjectJava extends JFrame {
             int hours = (int) input_hours.getValue();
             int minutes = (int) input_minutes.getValue();
 
-            // logField.append("Participant added!");
-            // participantField.append(fullName + "reservation at" + hours + minutes);
-            //ParticipantInfo P = new ParticipantInfo(firstName, lastName, hours, minutes);
-
-
             try {
                 // Validate input
                 ParticipantInfo.main(firstName, lastName);
@@ -64,26 +60,37 @@ public class ProjectJava extends JFrame {
                 Collections.sort(list, Comparator.comparingInt(ParticipantInfo::getAppointmentTime));
 
                 // Update UI
-                logField.append("Participant added!");
-                participantField.append(participant.getFu00llName() + " reservation at " + hours + ":" + minutes);
+                logField.append("Thank you, you were added." + "\n");
+                participantField.append(participant.getFullName() + " reservation at " + hours + ":" + minutes + "\n");
             } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(addParticipantButton, "Name participant not valid!");
+                JOptionPane.showMessageDialog(addParticipantButton, "ERROR: this is not a valid name.");
             }
         });
 
         clear_btn.addActionListener(e -> {
             insertFn.setText("");
             insertLn.setText("");
-            input_hours.setValue(input_hours.getMinimumSize());
-            input_minutes.setValue(input_minutes.getMinimumSize());
+            input_hours.setValue(0);
+            input_minutes.setValue(0);
         });
 
         // Set the limits for the input_hours spinner
         SpinnerNumberModel hoursModel = new SpinnerNumberModel(0, 0, 23, 1);
         input_hours.setModel(hoursModel);
+        input_hours.setPreferredSize(new Dimension(250, 20));
+        input_hours.setMinimumSize(new Dimension(250, 20));
 
         // Set the limits for the input_minutes spinner
         SpinnerNumberModel minutesModel = new SpinnerNumberModel(0, 0, 59, 1);
         input_minutes.setModel(minutesModel);
+        input_minutes.setPreferredSize(new Dimension(300, 20));
+        input_minutes.setMinimumSize(new Dimension(300, 20));
+
+        addParticipantButton.setPreferredSize(new Dimension (250, 30));
+        addParticipantButton.setMinimumSize(new Dimension (250, 30));
+
+
+
     }
+
 }

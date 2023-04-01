@@ -11,7 +11,7 @@ public class ParticipantInfo extends ProjectJava {
 
     public ParticipantInfo(String firstName, String lastName, int hours, int minutes) {
           if (firstName.isEmpty() || lastName.isEmpty() || hours < 0 || minutes < 0) {
-              JOptionPane.showMessageDialog(mainPanel, "Please fill in all fields with valid values.");
+              JOptionPane.showMessageDialog(mainPanel, "Please fill in all fields.");
               return;
           }  else if(!firstName.matches("[a-zA-Z\\\\s\\\\-ëäöïü]+") || !lastName.matches("[a-zA-Z\\\\s\\\\-ëäöïü]+")) {
               throw new IllegalArgumentException("Participant name not valid!");
